@@ -1,0 +1,42 @@
+import requests
+import urllib.request
+import time
+from bs4 import BeautifulSoup
+
+#Oxygen Latest Version
+page = requests.get("https://www.oxygenxml.com/eol.html")
+soup = BeautifulSoup(page.content, 'html.parser')
+oxyv = soup.find_all(class_ = 'color_version_n')
+oxyversion = oxyv[0]
+
+
+#XMetaL
+page = requests.get("https://go.pardot.com/l/333831/2017-03-28/28j?_ga=2.97714463.1843481678.1574431002-258855336.1572862733")
+soup = BeautifulSoup(page.content, "html.parser")
+xmtl = soup.find_all(class_ = 'leftitem collapsed')
+xmtlversion = xmtl[0]
+
+
+#WordPress
+page = requests.get('https://wordpress.org/news/category/releases/')
+soup = BeautifulSoup(page.content, 'html.parser')
+wordpress = soup.find_all(class_ = 'alt')
+wrdpversion = wordpress[0]
+
+#AdobeExperienceManager
+page = requests.get('https://helpx.adobe.com/experience-manager/6-5/release-notes.html')
+soup = BeautifulSoup(page.content, 'html.parser')
+aem = soup.find_all(class_ = 'table parbase section')
+aemversion = aem[0]
+
+#Drupal
+#page = requests.get('https://www.drupal.org/core/release-cycle-overview')
+#soup = BeautifulSoup(page.content, 'html.parser')
+#drupalver = soup.find(id="node-2383987")
+#dversion = drupalver
+
+
+print(oxyversion.prettify())
+print(xmtlversion.prettify())
+print(wrdpversion.prettify())
+print(aemversion.prettify())
